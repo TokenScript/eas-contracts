@@ -9,7 +9,8 @@ export enum DeploymentNetwork {
   ArbitrumOne = 'arbitrum-one',
   Sepolia = 'sepolia',
   Hardhat = 'hardhat',
-  Tenderly = 'tenderly'
+  Tenderly = 'tenderly',
+  AuroraTestnet = 'aurora-testnet'
 }
 
 export const ZERO_ADDRESS = AddressZero;

@@ -12,6 +12,7 @@ import 'hardhat-gas-reporter';
 import { HardhatUserConfig } from 'hardhat/config';
 import { MochaOptions } from 'mocha';
 import 'solidity-coverage';
+import fs from "fs";
 
 interface EnvOptions {
   ETHEREUM_PROVIDER_URL?: string;
@@ -29,6 +30,7 @@ const {
   ETHEREUM_PROVIDER_URL = '',
   ETHEREUM_SEPOLIA_PROVIDER_URL = '',
   ETHEREUM_ARBITRUM_ONE_PROVIDER_URL = '',
+  ETHEREUM_AURORA_TESTNET_PROVIDER_URL = '',
   ETHERSCAN_API_KEY,
   PROFILE: isProfiling,
   TENDERLY_FORK_ID = '',
@@ -36,6 +38,8 @@ const {
   TENDERLY_TEST_PROJECT = '',
   TENDERLY_USERNAME = ''
 }: EnvOptions = process.env as any as EnvOptions;
+
+const PRIVATE_KEY = fs.readFileSync(__dirname + "/deployer.key").toString().trim();
 
 const mochaOptions = (): MochaOptions => {
   let timeout = 600000;
@@ -78,6 +82,14 @@ const config: HardhatUserConfig = {
       url: ETHEREUM_SEPOLIA_PROVIDER_URL,
       saveDeployments: true,
       live: true
+    },
+    [DeploymentNetwork.AuroraTestnet]: {
+      chainId: 1313161555,
+      url: ETHEREUM_AURORA_TESTNET_PROVIDER_URL,
+      saveDeployments: true,
+      live: true,
+      accounts: [PRIVATE_KEY],
+      gasPrice: 90000000000,
     },
     [DeploymentNetwork.ArbitrumOne]: {
       chainId: 42161,
