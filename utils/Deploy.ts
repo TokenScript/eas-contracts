@@ -61,8 +61,9 @@ export const isMainnetFork = () => isTenderlyFork();
 export const isMainnet = () => getNetworkName() === DeploymentNetwork.Mainnet || isMainnetFork();
 export const isSepolia = () => getNetworkName() === DeploymentNetwork.Sepolia;
 export const isAuroraTestnet = () => getNetworkName() === DeploymentNetwork.AuroraTestnet;
+export const isAurora = () => getNetworkName() === DeploymentNetwork.Aurora;
 export const isTestnet = () => isSepolia() || isAuroraTestnet();
-export const isLive = () => (isMainnet() && !isMainnetFork()) || isSepolia() || isAuroraTestnet();
+export const isLive = () => (isMainnet() && !isMainnetFork()) || isSepolia() || isAuroraTestnet() || isAurora();
 
 export const getDeploymentDir = () => {
   return path.join(config.paths.deployments, getNetworkName());

@@ -18,6 +18,8 @@ interface EnvOptions {
   ETHEREUM_PROVIDER_URL?: string;
   ETHEREUM_SEPOLIA_PROVIDER_URL?: string;
   ETHEREUM_ARBITRUM_ONE_PROVIDER_URL?: string;
+  ETHEREUM_AURORA_TESTNET_PROVIDER_URL?: string;
+  ETHEREUM_AURORA_PROVIDER_URL?: string;
   ETHERSCAN_API_KEY?: string;
   PROFILE?: boolean;
   TENDERLY_FORK_ID?: string;
@@ -31,6 +33,7 @@ const {
   ETHEREUM_SEPOLIA_PROVIDER_URL = '',
   ETHEREUM_ARBITRUM_ONE_PROVIDER_URL = '',
   ETHEREUM_AURORA_TESTNET_PROVIDER_URL = '',
+  ETHEREUM_AURORA_PROVIDER_URL = '',
   ETHERSCAN_API_KEY,
   PROFILE: isProfiling,
   TENDERLY_FORK_ID = '',
@@ -89,7 +92,14 @@ const config: HardhatUserConfig = {
       saveDeployments: true,
       live: true,
       accounts: [PRIVATE_KEY],
-      gasPrice: 90000000000,
+      gas: "auto"
+    },
+    [DeploymentNetwork.AuroraTestnet]: {
+      chainId: 1313161554,
+      url: ETHEREUM_AURORA_PROVIDER_URL,
+      saveDeployments: true,
+      live: true,
+      accounts: [PRIVATE_KEY],
     },
     [DeploymentNetwork.ArbitrumOne]: {
       chainId: 42161,

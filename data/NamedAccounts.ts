@@ -21,6 +21,10 @@ const auroraTestnet = (address: string) => ({
   [DeploymentNetwork.AuroraTestnet]: address
 });
 
+const aurora = (address: string) => ({
+  [DeploymentNetwork.Aurora]: address
+});
+
 const arbitrumOne = (address: string) => ({
   [DeploymentNetwork.ArbitrumOne]: address
 });
@@ -37,7 +41,8 @@ export const NamedAccounts = {
     ...mainnet(deployer),
     ...sepolia(deployer),
     ...arbitrumOne(deployer),
-    ...auroraTestnet("0xE761EB6E829DE49DEAB008120733C1E35ACF77DB")
+    ...auroraTestnet("0xE761EB6E829DE49DEAB008120733C1E35ACF77DB"),
+    ...aurora("0xE761EB6E829DE49DEAB008120733C1E35ACF77DB")
   },
 
   ...TestNamedAccounts
